@@ -60,7 +60,10 @@ Make sure you have Python version 3.10.6 or higher (but lower than 3.11.0) insta
 
 ```
 cd <NetDiffusion main folder>/fine_tune/kohya_ss_fork/
-susdo apt install python3.10-venv # Ensure that venv support is pre-installed. You can install it on Ubuntu 22.04 using the command:
+```
+# Ensure that venv support is pre-installed. You can install it on Ubuntu 22.04 using the command:
+```
+sudo apt install python3.10-venv 
 python3.10 -m venv "venv"
 source venv/bin/activate
 ```
