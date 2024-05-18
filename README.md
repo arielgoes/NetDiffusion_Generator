@@ -59,6 +59,8 @@ git clone https://github.com/Chasexj/stable-diffusion-webui-fork.git
 
 ```
 cd <NetDiffusion main folder>/fine_tune/kohya_ss_fork/
+susdo apt install python3.10-venv # Ensure that venv support is pre-installed. You can install it on Ubuntu 22.04 using the command:
+python3.10 -m venv "venv"
 source venv/bin/activate
 ```
 
