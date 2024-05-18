@@ -9,6 +9,12 @@
 
 This tutorial is based on the [original guide steps](https://github.com/noise-lab/NetDiffusion_Generator/blob/main/README.md) for generating PCAPs with [NetDiffusion](https://dl.acm.org/doi/abs/10.1145/3639037).
 
+## Requirements
+* Ubuntu 20.04.6 LTS (tested)
+* CUDA 11.8
+* VRAM 10GB+ (without Low VRAM options on StableDiffusion)
+* [nPrint](https://nprint.github.io/nprint/install.html) for packet representation as image
+
 ## Introduction
 NetDiffusion is an innovative tool designed to address the challenges of obtaining high-quality, labeled network traces for machine learning tasks in networking. Privacy concerns, data staleness, and the limited availability of comprehensive datasets have long hindered research and development efforts. NetDiffusion leverages a controlled variant of a Stable Diffusion model to generate synthetic network traffic that not only boasts high fidelity but also adheres to protocol specifications.
 
@@ -47,7 +53,7 @@ git clone https://github.com/Chasexj/stable-diffusion-webui-fork.git
 ```
 
 ## Set Python virtual environemnt provided by `kohya_ss_fork`
-From now on, I recommend to use the Python 3.10.13 virtual environment in `kohya_ss_fork` folder:
+**Note: From now on, I recommend to use the Python 3.10.13 virtual environment in `kohya_ss_fork` folder:**
 
 ```
 cd <NetDiffusion main folder>/fine_tune/kohya_ss_fork/
@@ -79,9 +85,9 @@ bash webui.sh
 
 1. Open the WebUI via the ssh port on the preferred browser, example address: http://localhost:7860/
 2. Under `Extras/Batch From Directory`, enter the absolute path for `/NetDiffusion_Generator/data/preprocessed_fine_tune_imgs` and `/NetDiffusion_Generator/fine_tune/kohya_ss_fork/model_training/test_task/image/20_network` as the input/output directories.
-2. Under `Extras/batch_from_directory`, set the `scale to` parameter to `width = 816` and `height = 768` for resource-friendly fine-tuning (adjust based on resource availability).
-3. Enable the `caption` parameter under `extras/batch_from_directory` and click `generate`.
-4. Terminate `webui.sh`
+3. Under `Extras/batch_from_directory`, set the `scale to` parameter to `width = 816` and `height = 768` for resource-friendly fine-tuning (adjust based on resource availability).
+4. Enable the `caption` parameter under `extras/batch_from_directory` and click `generate`.
+5. Terminate `webui.sh`
 
 
 ## Install the Python virtual environment's requirements
@@ -213,7 +219,7 @@ Installation was successful!
 
 
 ## Change the caption prompt for explicit prompt-to-image correlation
-The steps below will create a corresponding text file (e.g., `netflix_01.txt`) for the preprocessed data (e.g., `netflix_01.png`).
+The steps below will create a corresponding text file (e.g., `netflix_01.txt`) with customized traffic label for the preprocessed data (e.g., `netflix_01.png`).
 
 ```
 # For example, 'pixelated network data, type-0' refers to NetFlix pcap,
@@ -236,7 +242,7 @@ bash gui.sh
 ```
 
 1. Open the fine-tuning interface via the ssh port on the preferred browser, example address: http://localhost:7860/
-2. Under `LoRA -> Training`, load the configuration file via the absolute path for `/NetDiffusion_Generator/fine_tune/LoraLowVRAMSettings.json`
+2. Under `LoRA/Training`, load the configuration file via the absolute path for `/NetDiffusion_Generator/fine_tune/LoraLowVRAMSettings.json`
 3. Under `LoRA\Training\Folders`, enter the absolute paths for `/NetDiffusion_Generator/fine_tune/kohya_ss_fork/model_training/test_task/image`,`/NetDiffusion_Generator/fine_tune/kohya_ss_fork/model_training/test_task/model`, and `/NetDiffusion_Generator/fine_tune/kohya_ss_fork/model_training/test_task/log` for the *Image/Output/Logging* folders, respectively, and adjust the model name if needed.
 4. Under `LoRA\Training\Parameters\Basic`, adjust the Max Resolution to match the resolution from data preprocessing, e.g., 816,768 (i.e., width, height).
 5. Click on Start Training to begin the fine-tuning. Adjust the fine-tuning parameters as needed due to different generation tasks may have different parameter requirement to yield better synthetic data quality.
@@ -260,10 +266,10 @@ bash webui.sh
 2. Install ControlNet extension for the WebUI and restart the WebUI: https://github.com/Mikubill/sd-webui-controlnet. Go to `Extensions/` and place this URL in the according field to install it.
 3. To generate an image representation of a network trace, enter the corresponding caption prompt with the LoRA model extension under 'txt2img'. For example 'pixelated network data, type-0 \<lora:Addams:1\>' for NetFlix data.
 > Note: the safetensors file rule aforementioned is also applied here \<lora:Addams:1\>
-5. Adjust the generation resolution to match the resolution from data preprocessing, e.g., 816,768.
-6. Adjust the seed to match the seed used in fine-tuning, default is 1234.
-7. Enable Hires.fix to scale to 1088, 1024.
-8. From training data, sample a real pcap image (that belongs to the same category as the desired synthetic traffic) as input to the ControlNet interface, and set the Control Type (we recommend canny).
+4. Adjust the generation resolution to match the resolution from data preprocessing, e.g., 816,768.
+5. Adjust the seed to match the seed used in fine-tuning, default is 1234.
+6. Enable Hires.fix to scale to 1088, 1024.
+7. From training data, sample a real pcap image (that belongs to the same category as the desired synthetic traffic) as input to the ControlNet interface, and set the Control Type (we recommend canny).
 > Download the models from ControlNet 1.1: https://huggingface.co/lllyasviel/ControlNet-v1-1/tree/main
 >
 > You need to download model files ending with ".pth" .
@@ -275,7 +281,7 @@ bash webui.sh
 
 > **Note: Besides placing/dropping a fine-tune image do not forget to Enable ControlNet before generating the image.**
 
-10. Click Generate to complete the generation. Note that extensive adjustments on the generation and ControlNet parameters may be needed to yield the best generation result as the generation tasks and training data differ from each other.
+8. Click on `Generate` to complete the generation. Note that extensive adjustments on the generation and ControlNet parameters may be needed to yield the best generation result as the generation tasks and training data differ from each other.
 
 ## Post-Generation Heuristic Correction
 Once enough instances of image representations of desired synthetic traffic are generated, place all of such instances under `/NetDiffusion_Generator/data/generated_imgs`.
@@ -320,5 +326,3 @@ sudo tcpreplay --loop=0 --verbose -i eno1 00000-1234.pcap
   publisher={ACM New York, NY, USA}
 }
 ```
-
-
