@@ -260,16 +260,21 @@ bash gui.sh
 In the previous steps we generated a file in the model folder provided (i.e., `fine-tune/kohya_ss_fork/model_training/example_task/model`). The filename (by default) is `Addams.safetensors`. If not, replace `Addams` in the first step in the code block below by the correct name:
 
 ```
+# Go to the `model` folder in the `example_task` (relative path below)
+cd `fine_tune/kohya_ss_fork/model_training/example_task/model`
+# Rename the safetensors and json files
+mv last.safetensors Adam.safetensors
+mv last_<something>.json Adam.json
 # Copy the fine-tuned LoRA model (adjust path namings as needed) to Stable Diffusion WebUI
-cp model_training/example_task/model/Addams.safetensors ../stable-diffusion-webui/models/Lora/
+cp Adam.safetensors ../../../../stable-diffusion-webui-fork/models/Lora/
 # Navigate to the generation directory
-cd ../stable-diffusion-webui/
+cd ../../../../stable-diffusion-webui-fork
 # Initialize Stable Diffusion WebUI
 bash webui.sh
 ```
 
 1. Open the WebUI via the ssh port on the preferred browser, example address: http://localhost:7860/
-2. Install ControlNet extension for the WebUI and restart the WebUI: https://github.com/Mikubill/sd-webui-controlnet. Go to `Extensions/` and place this URL in the according field to install it.
+2. Install ControlNet extension for the WebUI and restart the WebUI: https://github.com/Mikubill/sd-webui-controlnet. Go to `Extensions/Install From URL` and place this URL in the according field to install it.
 3. To generate an image representation of a network trace, enter the corresponding caption prompt with the LoRA model extension under 'txt2img'. For example 'pixelated network data, type-0 \<lora:Addams:1\>' for NetFlix data.
 > Note: the safetensors file rule aforementioned is also applied here \<lora:Addams:1\>
 4. Adjust the generation resolution to match the resolution from data preprocessing, e.g., 816,768.
