@@ -55,14 +55,11 @@ git clone https://github.com/Chasexj/stable-diffusion-webui-fork.git
 ```
 
 ## Set Python virtual environemnt provided by `kohya_ss_fork`
-**Note: From now on, I recommend to use the Python 3.10.14 virtual environment in `kohya_ss_fork` folder:**
-Make sure you have Python version 3.10.6 or higher (but lower than 3.11.0) installed on your system.
+Ensure that `venv` support is pre-installed. You can install it on Ubuntu using the command:\
+**Note: From now on, I recommend to use the Python 3.10.14 virtual environment in `kohya_ss_fork` folder**
 
 ```
 cd <NetDiffusion main folder>/fine_tune/kohya_ss_fork/
-```
-# Ensure that venv support is pre-installed. You can install it on Ubuntu 22.04 using the command:
-```
 sudo apt install python3.10-venv 
 python3.10 -m venv "venv"
 source venv/bin/activate
