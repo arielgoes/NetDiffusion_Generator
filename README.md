@@ -46,9 +46,11 @@ cd NetDiffusion_Generator
 cd fine_tune
 
 # Remove the empty `kohya_ss_fork @ 8a39d4d` and clone it as follows
+rm -rf kohya_ss_fork
 git clone https://github.com/Chasexj/kohya_ss_fork.git
 
-# Clone `sd-webui-fork @ 2533cf8` (also inside `fine_tune` folder)
+# Remove the empty 'sd-webui-fork' folder and clone `sd-webui-fork @ 2533cf8` (also inside `fine_tune` folder)
+rm -rf sd-webui-fork
 git clone https://github.com/Chasexj/stable-diffusion-webui-fork.git
 ```
 
