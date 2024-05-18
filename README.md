@@ -230,7 +230,7 @@ The steps below will create a corresponding text file (e.g., `netflix_01.txt`) w
 ```
 # For example, 'pixelated network data, type-0' refers to NetFlix pcap,
 # Adjust the script based on fine-tuning task.
-cd NetDiffusion_Generator/fine_tune && python3 caption_changing.py test_task/image/20_network
+cd NetDiffusion_Generator/fine_tune && python3 caption_changing.py example_task/image/20_network
 ```
 
 ## Fine-Tuning
@@ -249,7 +249,7 @@ bash gui.sh
 
 1. Open the fine-tuning interface via the ssh port on the preferred browser, example address: http://localhost:7860/
 2. Under `LoRA/Training`, load the configuration file via the absolute path for `/NetDiffusion_Generator/fine_tune/LoraLowVRAMSettings.json`
-3. Under `LoRA\Training\Folders`, enter the absolute paths for `/NetDiffusion_Generator/fine_tune/kohya_ss_fork/model_training/test_task/image`,`/NetDiffusion_Generator/fine_tune/kohya_ss_fork/model_training/test_task/model`, and `/NetDiffusion_Generator/fine_tune/kohya_ss_fork/model_training/test_task/log` for the *Image/Output/Logging* folders, respectively, and adjust the model name if needed.
+3. Under `LoRA\Training\Folders`, enter the absolute paths for `/NetDiffusion_Generator/fine_tune/kohya_ss_fork/model_training/example_task/image`,`/NetDiffusion_Generator/fine_tune/kohya_ss_fork/model_training/example_task/model`, and `/NetDiffusion_Generator/fine_tune/kohya_ss_fork/model_training/example_task/log` for the *Image/Output/Logging* folders, respectively, and adjust the model name if needed.
 4. Under `LoRA\Training\Parameters\Basic`, adjust the Max Resolution to match the resolution from data preprocessing, e.g., 816,768 (i.e., width, height).
 5. Click on Start Training to begin the fine-tuning. Adjust the fine-tuning parameters as needed due to different generation tasks may have different parameter requirement to yield better synthetic data quality.
 6. After the `model saved` message (check the terminal), close the server (Ctrl + C).
@@ -257,11 +257,11 @@ bash gui.sh
 > By default, the `LoraLowVRAMSettings.json` file, contains Windows-based file paths for *Image/Output/Logging* files. You can manually configure the correct absolute paths and the Max Resolution in this file and load it again.
 
 ## Generation
-In the previous steps we generated a file in the model folder provided (i.e., `fine-tune/kohya_ss_fork/model_training/test_task/model`). The filename (by default) is `Addams.safetensors`. If not, replace `Addams` in the first step in the code block below by the correct name:
+In the previous steps we generated a file in the model folder provided (i.e., `fine-tune/kohya_ss_fork/model_training/example_task/model`). The filename (by default) is `Addams.safetensors`. If not, replace `Addams` in the first step in the code block below by the correct name:
 
 ```
 # Copy the fine-tuned LoRA model (adjust path namings as needed) to Stable Diffusion WebUI
-cp model_training/test_task/model/Addams.safetensors ../stable-diffusion-webui/models/Lora/
+cp model_training/example_task/model/Addams.safetensors ../stable-diffusion-webui/models/Lora/
 # Navigate to the generation directory
 cd ../stable-diffusion-webui/
 # Initialize Stable Diffusion WebUI
