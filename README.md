@@ -84,7 +84,7 @@ cd ../fine_tune/kohya_ss_fork/model_training/
 mkdir -p example_task/{image/20_network,log,model}
 
 # Leverage Stable Diffusion WebUI for initial caption creation
-cd ../../sd-webui-fork/stable-diffusion-webui/
+cd ../../stable-diffusion-webui/
 # Lunch WebUI
 bash webui.sh
 ```
@@ -261,9 +261,9 @@ In the previous steps we generated a file in the model folder provided (i.e., `f
 
 ```
 # Copy the fine-tuned LoRA model (adjust path namings as needed) to Stable Diffusion WebUI
-cp model_training/test_task/model/Addams.safetensors ../sd-webui-fork/stable-diffusion-webui/models/Lora/
+cp model_training/test_task/model/Addams.safetensors ../stable-diffusion-webui/models/Lora/
 # Navigate to the generation directory
-cd ../sd-webui-fork/stable-diffusion-webui/
+cd ../stable-diffusion-webui/
 # Initialize Stable Diffusion WebUI
 bash webui.sh
 ```
