@@ -90,7 +90,7 @@ bash webui.sh
 ```
 
 1. Open the WebUI via the ssh port on the preferred browser, example address: http://localhost:7860/
-2. Under `Extras/Batch From Directory`, enter the absolute path for `/NetDiffusion_Generator/data/preprocessed_fine_tune_imgs` and `/NetDiffusion_Generator/fine_tune/kohya_ss_fork/model_training/test_task/image/20_network` as the input/output directories.
+2. Under `Extras/Batch From Directory`, enter the absolute path for `/NetDiffusion_Generator/data/preprocessed_fine_tune_imgs` and `/NetDiffusion_Generator/fine_tune/kohya_ss_fork/model_training/example_task/image/20_network` as the input/output directories.
 3. Under `Extras/batch_from_directory`, set the `scale to` parameter to `width = 816` and `height = 768` for resource-friendly fine-tuning (adjust based on resource availability).
 4. Enable the `caption` parameter under `extras/batch_from_directory` and click `generate`.
 5. Terminate `webui.sh`
