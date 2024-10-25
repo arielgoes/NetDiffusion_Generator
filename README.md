@@ -60,6 +60,9 @@ Ensure that `venv` support is pre-installed. You can install it on Ubuntu using 
 
 ```
 cd <NetDiffusion main folder>/fine_tune/kohya_ss_fork/
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install python3.10
 sudo apt install python3.10-venv 
 python3.10 -m venv "venv"
 # Verify the python version now
